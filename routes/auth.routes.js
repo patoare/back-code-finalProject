@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 // POST Signup
 router.post('/signup', async(req, res, next) => {
 const credentials = req.body
-
+//if
 const salt = bcrypt.genSaltSync(13)
 const passwordHash = bcrypt.hashSync(credentials.password, salt)
 
@@ -21,7 +21,7 @@ const newUser = await User.create({
   email: credentials.email,
   passwordHash: passwordHash,
 })
-res.status(201).json()
+res.status(201).json('created!')
 } catch(error) {
   next(error)
 }
@@ -40,10 +40,10 @@ if(potentialUser) {
   )
 res.json({authToken})
   } else {
-    res.status(403).json()
+    res.status(403).json('incorrect password')
   }
 } else {
-  res.status(400).json()
+  res.status(400).json('incorrect')
 }
 } catch(error) {
   next(error)
@@ -53,10 +53,12 @@ res.json({authToken})
 router.get('/verify', isAuthenticated, async(req, res, next) => {
   try {
     const currentUser = await User.findById(req.tokenPayload.userId)
+    const userCopy = currentUser._doc
+    delete userCopy.passwordHash
+    res.status(200).json(userCopy)
   } catch(error) {
     next(error)
   }
- res.json('estas viendo este rdo porque el token es correcto')
 })
 
 
