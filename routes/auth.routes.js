@@ -38,7 +38,7 @@ if(potentialUser) {
     { algorithm: 'HS256',
       expiresIn: "6h"}
   )
-res.json(authToken)
+res.json({authToken})
   } else {
     res.status(403).json()
   }
@@ -56,7 +56,7 @@ router.get('/verify', isAuthenticated, async(req, res, next) => {
   } catch(error) {
     next(error)
   }
- res.json('estas viendo este rdo porque el tokes es correcto')
+ res.json('estas viendo este rdo porque el token es correcto')
 })
 
 
