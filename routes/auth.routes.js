@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const bcrypt = require('bcryptjs')
 const User = require('../models/User.moodel')
+const jwt = require('jsonwebtoken')
 
 router.get('/', (req, res) => {
   res.json('All good in auth')
@@ -27,7 +28,12 @@ try {
 const potentialUser = await User.findOne({username: credentials.username})
 if(potentialUser) {
   if(bcrypt.compareSync(credentials.password, potentialUser.passwordHash)) {
-res.json()
+    const payload = {userId: potentialUser._id}
+  const authToken = jwt.sign(payload, process.env.TOKEN_SECRET,
+    { algorithm: 'HS256',
+      expiresIn: "6h"}
+  )
+res.json(authToken)
   } else {
     res.status(403).json()
   }
