@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model, Types } = require('mongoose')
 
 
 const treatmentSchema = new Schema(
@@ -17,9 +17,10 @@ const treatmentSchema = new Schema(
       type: String,
       required: [true, 'Password is required.'],
     },
-    userId: {
-    therapistId: String,
-        required: [true, 'Id is required'],
+    createdBy: {
+        type: Types.ObjectId,
+        ref: 'User', 
+        required: true,
       },
     },
   {
@@ -29,3 +30,5 @@ const treatmentSchema = new Schema(
 )
 
 const Treatment = model('Treatment', treatmentSchema)
+
+module.exports = Treatment;
