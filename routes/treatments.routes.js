@@ -6,7 +6,7 @@ const router = require('express').Router()
 //to get all the treatments
 router.get('/', async(req, res, next) => {
   try{
-    const treatments = await Treatment.find()
+    const treatments = await Treatment.find().populate('createdBy', '-passwordHash')
     res.json(treatments)
   }catch(error) {
     next(error)
@@ -25,11 +25,21 @@ router.post('/', isAuthenticated, async(req, res, next) => {
 })
 
 //to delete a treatment (only for the user that create it)
-router.delete('/:treatmentId', async(req, res, next) => {
+router.delete('/:treatmentId', isAuthenticated, async(req, res, next) => {
   const {treatmentId} = req.params
   if(isValidObjectId(treatmentId)) {
     try{
-        await Treatment.findByIdAndDelete(treatmentId)
+      const bookToDelete = await Treatment.findById(treatmentId)
+      if (bookToDelete) {
+        if(bookToDelete.createdBy == req.tokenPayload.userId) {
+          await Treatment.findByIdAndDelete(treatmentId)
+          res.status(204).json()
+        } else {
+          res.status(403).json()
+        }
+      } else {
+        res.status(400).json()
+      }     
     } catch(error) {
       next(error)}
   } else {
