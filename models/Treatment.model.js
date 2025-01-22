@@ -15,7 +15,7 @@ const treatmentSchema = new Schema(
     },
     therapeuticTech: {
       type: String,
-      required: [true, 'Password is required.'],
+      required: [true, ],
     },
     createdBy: {
         type: Types.ObjectId,
