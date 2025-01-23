@@ -14,18 +14,19 @@ router.get('/', async(req, res, next) => {
 })
 
 //to get a single treatment
-router.get('/:treatmentId', async(req, res, next) => {
-  const {treatmentId} = req.params
+router.get('/:id', async(req, res, next) => {
+  const {id} = req.params
 
-  if(isValidObjectId(treatmentId)) {
+  if(isValidObjectId(id)) {
     try{
-      const treatment = await Treatment.findById(treatmentId)
+      const treatment = await Treatment.findById(id)
       if (treatment) {
           res.status(200).json(treatment)
         } else {
           res.status(400).json()
         }
     } catch(error) {
+      console.log(error)
       next(error)}
   } else {
     res.status(400).json({message: 'Invalid Id'})
