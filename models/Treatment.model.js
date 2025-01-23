@@ -13,9 +13,24 @@ const treatmentSchema = new Schema(
       required: [true, 'Email is required.'],
       trim: true,
     },
+    frecuency: {
+      type: String,  
+      required: [true, 'Frequency is required.'],
+      trim: true,
+    },
+    duration: {
+      type: String,  
+      required:  [true, 'Duration is required.'],
+      trim: true,
+    },
+    comments: {
+      type: String, 
+      trim: true, 
+    },
     therapeuticTech: {
       type: String,
-      required: [true, ],
+      required:  [false],
+      trim: true,
     },
     createdBy: {
         type: Types.ObjectId,

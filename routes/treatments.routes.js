@@ -17,7 +17,8 @@ router.get('/', async(req, res, next) => {
 router.post('/', isAuthenticated, async(req, res, next) => {
   const treatmentToCreate = req.body
   try {
-       const newTreatment = await Treatment.create({...treatmentToCreate, createdBy: req.tokenPayload.userId})
+       const newTreatment = await Treatment.create({...treatmentToCreate,
+        createdBy: req.tokenPayload.userId})
        res.status(201).json(newTreatment)
   } catch (error) {
     next(error)

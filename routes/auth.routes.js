@@ -18,6 +18,7 @@ const passwordHash = bcrypt.hashSync(credentials.password, salt)
 try {
 const newUser = await User.create({
   username: credentials.username,
+  surname: credentials.surname,
   email: credentials.email,
   passwordHash: passwordHash,
 })
