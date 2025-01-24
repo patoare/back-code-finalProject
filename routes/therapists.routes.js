@@ -15,14 +15,15 @@ router.get('/', async(req, res, next) => {
   }
 })
 //to update a therapist profile
-router.put('/:id', isAuthenticated, async(req, res, next) =>{
-  const {id} = req.params
+router.put('/', isAuthenticated, async(req, res, next) =>{
+ 
   const profileToUpdate = req.body
   try{
-    const newData = await User.findByIdAndUpdate(id, 
-      {...profileToUpdate,
-      updatedBy: req.tokenPayload.userId,
-      },
+    const userId = req.tokenPayload.userId;
+
+    const newData = await User.findByIdAndUpdate(userId, 
+      {...profileToUpdate},
+      
        {
         new: true,
         runValidators: true

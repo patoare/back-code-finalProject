@@ -39,7 +39,12 @@ if(potentialUser) {
     { algorithm: 'HS256',
       expiresIn: "6h"}
   )
-res.json({authToken})
+res.json({authToken,
+  user: {
+    _id: potentialUser._id,
+    username: potentialUser.username,
+  },
+});
   } else {
     res.status(403).json('incorrect password')
   }
