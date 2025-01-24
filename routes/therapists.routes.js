@@ -1,4 +1,5 @@
 
+const { isAuthenticated } = require('../middlewares/route-guard.middleware')
 const User = require('../models/User.moodel')
 const router = require('express').Router()
 const mongoose = require('mongoose'); 
@@ -13,6 +14,29 @@ router.get('/', async(req, res, next) => {
     next(error)
   }
 })
+//to update a therapist profile
+router.put('/:id', isAuthenticated, async(req, res, next) =>{
+  const {id} = req.params
+  const profileToUpdate = req.body
+  try{
+    const newData = await User.findByIdAndUpdate(id, 
+      {...profileToUpdate,
+      updatedBy: req.tokenPayload.userId,
+      },
+       {
+        new: true,
+        runValidators: true
+       } 
+    );
+    if (!newData) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+      res.status(200).json({ message: 'User updated successfully', user: newData });
+  } catch(error) {
+    next(error)
+  }
+})
+
 //to get a single therapist
 router.get('/:id', async(req, res, next) => {
   const {id} = req.params

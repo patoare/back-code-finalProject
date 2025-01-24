@@ -17,7 +17,6 @@ const userSchema = new Schema(
       required: [true, 'Surname is required.'],
       trim: true,
     },
-
     email: {
       type: String,
       required: [true, 'Email is required.'],
@@ -30,6 +29,18 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Password is required.'],
     },
+    area: {
+      type: String,
+        required: [false],
+      },
+      masters: {
+        type: String,
+          required: [false],
+        },
+        languages: {
+          type: String,
+            required: [false],
+          },
     profileImg: {
       type: String,
         required: [false],
