@@ -3,7 +3,12 @@ const { Schema, model, Types } = require('mongoose')
 
 const commentSchema = new Schema(
   {
-    content: {
+    commentPatient: {
+      type: String,
+      required: [true, 'Content is required.'],
+      trim: true,
+    },
+    commentTreatment: {
       type: String,
       required: [true, 'Content is required.'],
       trim: true,

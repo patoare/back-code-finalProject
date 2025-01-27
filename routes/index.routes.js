@@ -7,8 +7,10 @@ router.get('/', (req, res) => {
 
 const therapistsRoutes = require('./therapists.routes')
 const treatmentsRoutes = require('./treatments.routes')
+const commentsRoutes = require('./comments.routes')
 
 router.use('/therapists', therapistsRoutes)
 router.use('/treatments', treatmentsRoutes)
+router.use('/comments', commentsRoutes)
 
 module.exports = router

@@ -31,7 +31,7 @@ res.status(201).json('created!')
 router.post('/login', async(req, res, next) => {
   const credentials = req.body
 try {
-const potentialUser = await User.findOne({username: credentials.username})
+const potentialUser = await User.findOne({email: credentials.email})
 if(potentialUser) {
   if(bcrypt.compareSync(credentials.password, potentialUser.passwordHash)) {
     const payload = {userId: potentialUser._id}
