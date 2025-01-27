@@ -23,28 +23,33 @@ const userSchema = new Schema(
       trim: true,
       unique: true,
     },
+    area: {
+      type: String,
+        required: [false],
+      },
+    masters: {
+        type: String,
+          required: [false],
+        },
+    languages: {
+          type: String,
+          required: [false],
+          },
+    country: {
+            type: String,
+              required: [false],
+            },
+    profileImg: {
+      type: String,
+        required: [false],
+      },
 
     //chequear el type de la password para que quede seguro!!
     passwordHash: {
       type: String,
       required: [true, 'Password is required.'],
     },
-    area: {
-      type: String,
-        required: [false],
-      },
-      masters: {
-        type: String,
-          required: [false],
-        },
-        languages: {
-          type: String,
-            required: [false],
-          },
-    profileImg: {
-      type: String,
-        required: [false],
-      },
+    
     },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

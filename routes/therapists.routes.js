@@ -15,7 +15,7 @@ router.get('/', async(req, res, next) => {
   }
 })
 //to update a therapist profile
-router.put('/', isAuthenticated, async(req, res, next) =>{
+router.put('/:id', isAuthenticated, async(req, res, next) =>{
  
   const profileToUpdate = req.body
   try{
@@ -57,12 +57,5 @@ router.get('/:id', async(req, res, next) => {
     res.status(400).json({message: 'Invalid Id'})
   }
 })
-
-/*router.delete('/', async(req, res, next) => {
-  try{
-
-  } catch(error) {
-    next(error)}
-})*/
 
 module.exports = router

@@ -13,17 +13,17 @@ const treatmentSchema = new Schema(
       required: [true, 'Email is required.'],
       trim: true,
     },
-    frecuency: {
+    date: {
       type: String,  
       required: [true, 'Frequency is required.'],
       trim: true,
     },
-    duration: {
+    visitNumber: {
       type: String,  
       required:  [true, 'Duration is required.'],
       trim: true,
     },
-    comments: {
+    hashtag: {
       type: String, 
       trim: true, 
     },

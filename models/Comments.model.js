@@ -1,27 +1,30 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model, Types } = require('mongoose')
 
 
 const commentSchema = new Schema(
   {
-    Comments: {
+    content: {
       type: String,
-      required: [true, 'Comments are required.'],
+      required: [true, 'Content is required.'],
       trim: true,
     },
-    userId: {
-      type: String,
-      required: [true, 'Id is required.'],
-      trim: true,
+    treatment: {
+      type: Types.ObjectId,
+      ref: 'Treatment',
+      required: true,
     },
-    treatmentId: {
-      type: String,
-      required: [true, 'Id is required.'],
+    createdBy: {
+      type: Types.ObjectId,
+      ref: 'User',
+      required: true,
     },
-    },
+  },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
 )
 
-const Comment = model('comment', commentSchema)
+const Comment = model('comment', commentSchema);
+
+module.exports = Comment;
