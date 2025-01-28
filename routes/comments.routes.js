@@ -8,6 +8,9 @@ router.get('/:id', async(req, res, next) => {
   const { id } = req.params;
   try{
     const comments = await Comment.find({treatment: id})
+    .populate('treatment') 
+    .populate('createdBy');
+    
     res.json(comments)
   }catch(error) {
     next(error)
@@ -20,6 +23,7 @@ router.post('/', isAuthenticated, async(req, res, next) => {
   try {
        const newComment = await Comment.create({...commentToCreate,
         createdBy: req.tokenPayload.userId})
+        
        res.status(201).json(newComment)
   } catch (error) {
     next(error)

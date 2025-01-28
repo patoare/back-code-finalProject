@@ -3,6 +3,11 @@ const { Schema, model, Types } = require('mongoose')
 
 const commentSchema = new Schema(
   {
+    date: {
+      type: String,
+      required: [true, 'Date is required.'],
+      trim: true,
+    },
     commentPatient: {
       type: String,
       required: [true, 'Content is required.'],
