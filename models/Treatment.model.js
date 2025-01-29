@@ -3,6 +3,11 @@ const { Schema, model, Types } = require('mongoose')
 
 const treatmentSchema = new Schema(
   {
+    patientName: {
+      type: String,
+      required: [true, 'Name is required.'],
+      trim: true,
+    },
     description: {
       type: String,
       required: [true, 'Name is required.'],
