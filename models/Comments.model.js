@@ -8,6 +8,11 @@ const commentSchema = new Schema(
       required: [true, 'Date is required.'],
       trim: true,
     },
+    visitNumber: {
+      type: String,  
+      required:  [true, 'Duration is required.'],
+      trim: true,
+    },
     commentPatient: {
       type: String,
       required: [true, 'Content is required.'],
